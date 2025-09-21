@@ -144,13 +144,13 @@
         }
 
         .nav-pill.knox {
-            border-color: #dc2626;
-            color: #2563eb;
+            border-color: var(--knox-crimson);
+            color: var(--knox-gold);
         }
 
         .nav-pill.knox:hover {
-            background: rgba(220, 38, 38, 0.2);
-            border-color: #2563eb;
+            background: rgba(139, 0, 0, 0.2);
+            border-color: var(--knox-gold);
         }
 
         .contact-section {
@@ -341,49 +341,11 @@
 
         /* Knox Ramsey Thriller Card */
         .quick-card.knox-card {
-            background: #1a1a1a;
-            border: 2px solid #dc2626;
-            color: #ffffff;
+            background: linear-gradient(135deg, var(--knox-charcoal) 0%, var(--knox-steel) 100%);
+            border: 2px solid var(--knox-crimson);
+            color: var(--knox-fog);
             position: relative;
             overflow: hidden;
-        }
-
-        .knox-logo {
-            margin-bottom: 1rem;
-            font-family: 'Arial Black', 'Helvetica Bold', sans-serif;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-        }
-
-        .knox-logo .knox-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .knox-logo .knox-not-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: #dc2626;
-            z-index: 2;
-        }
-
-        .knox-logo .knox-text {
-            font-size: 2.2rem;
-            color: #ffffff;
-            display: block;
-            position: relative;
-            z-index: 1;
-            margin-top: 2px;
-        }
-
-        .knox-logo .ramsey-text {
-            font-size: 2.2rem;
-            color: #2563eb;
-            display: block;
-            margin-top: -0.5em;
         }
 
         .quick-card.knox-card::before {
@@ -393,7 +355,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent 0%, rgba(220, 38, 38, 0.1) 50%, transparent 100%);
+            background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.1) 50%, transparent 100%);
             animation: sweep 8s infinite;
         }
 
@@ -403,25 +365,37 @@
             100% { left: 100%; }
         }
 
+        .quick-card.knox-card::after {
+            content: 'KNOX RAMSEY';
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--knox-gold);
+            opacity: 0.3;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
         .quick-card.knox-card:hover {
-            box-shadow: 0 10px 40px rgba(220, 38, 38, 0.4);
-            border-color: #2563eb;
+            box-shadow: 0 10px 40px rgba(139, 0, 0, 0.4);
+            border-color: var(--knox-gold);
             transform: translateY(-5px);
         }
 
-        .quick-card.knox-card .card-icon {
-            display: none;
+        .quick-card.knox-card:hover::after {
+            opacity: 0.6;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
 
         .quick-card.knox-card .card-title {
-            color: #ffffff;
+            color: var(--knox-fog);
             font-weight: 700;
-            font-size: 1rem;
-            margin-top: 1rem;
         }
 
         .quick-card.knox-card .card-description {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(226, 232, 240, 0.8);
             font-style: italic;
         }
 
@@ -481,7 +455,6 @@
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
-                height: auto;
             }
 
             .left-panel {
@@ -489,10 +462,6 @@
                 height: auto;
                 position: relative;
                 padding: 2rem;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
             }
 
             .right-panel {
@@ -500,90 +469,7 @@
                 width: 100%;
             }
 
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-
-            .timeline-section, .cards-section, .stats-section {
-                padding: 2rem;
-            }
-
-            .knox-logo .knox-text,
-            .knox-logo .ramsey-text {
-                font-size: 1.8rem;
-            }
-
-            .quick-card.molly-card .molly-logo {
-                width: 40px;
-            }
-
-            .section-label {
-                font-size: 0.8rem;
-            }
-
-            .name-title {
-                font-size: 2rem;
-            }
-
-            .role-ticker {
-                font-size: 1rem;
-            }
-
-            .bio-text {
-                font-size: 1rem;
-            }
-
-            .quick-nav {
-                justify-content: center;
-            }
-
-            .nav-pill {
-                font-size: 0.8rem;
-                padding: 0.4rem 0.8rem;
-            }
-        }
-
-        /* Tablet specific */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .left-panel {
-                width: 35%;
-            }
-
-            .right-panel {
-                margin-left: 35%;
-                width: 65%;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Small phones */
-        @media (max-width: 375px) {
-            .left-panel {
-                padding: 1.5rem;
-            }
-
-            .name-title {
-                font-size: 1.75rem;
-            }
-
-            .knox-logo .knox-text,
-            .knox-logo .ramsey-text {
-                font-size: 1.5rem;
-            }
-
-            .timeline-section, .cards-section, .stats-section {
-                padding: 1.5rem;
-            }
-
-            .stats-grid {
+            .cards-grid, .stats-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -613,7 +499,7 @@
                 <nav class="quick-nav">
                     <a href="/mollys/" class="nav-pill molly">Molly's Grape & Citrus</a>
                     <a href="/resume/" class="nav-pill">Professional CV</a>
-                    <a href="https://knoxramseythrillers.com" target="_blank" class="nav-pill knox">Knox Ramsey</a>
+                    <a href="https://knoxramsey.com" target="_blank" class="nav-pill knox">Knox Ramsey</a>
                     <a href="/teaching/" class="nav-pill">Academia</a>
                     <a href="/blog/" class="nav-pill">Insights</a>
                 </nav>
@@ -697,17 +583,11 @@
                         </p>
                     </a>
 
-                    <a href="https://knoxramseythrillers.com" target="_blank" class="quick-card knox-card">
-                        <div class="knox-logo">
-                            <div class="knox-wrapper">
-                                <div class="knox-not-bar"></div>
-                                <div class="knox-text">KNOX</div>
-                            </div>
-                            <div class="ramsey-text">RAMSEY</div>
-                        </div>
-                        <h3 class="card-title">Thriller Series</h3>
+                    <a href="https://knoxramsey.com" target="_blank" class="quick-card knox-card">
+                        <div class="card-icon">⚡</div>
+                        <h3 class="card-title">Knox Ramsey Series</h3>
                         <p class="card-description">
-                            High-stakes action. International intrigue. Page-turning suspense.
+                            High-stakes thrillers. International intrigue. Page-turning action.
                         </p>
                     </a>
 
