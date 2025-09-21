@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Molly's Grape & Citrus | Innovation Through Digital Transformation</title>
+    <title>Robert Cummer | Where Technology Meets Tenacity</title>
     <style>
         * {
             margin: 0;
@@ -12,38 +12,81 @@
         }
 
         :root {
-            /* Molly's Brand Colors */
-            --molly-pink: #EF4E92;
-            --molly-hot-pink: #E2068A;
-            --molly-light-pink: #FFE9F0;
-            --molly-berry: #9C355D;
-            
-            /* Tech Blues for Balance */
-            --tech-blue: #1e3a5f;
-            --steel: #2c3e50;
+            /* Gen X Blues & Greys - Professional with Edge */
+            --midnight: #0a0e27;
+            --steel-blue: #1e3a5f;
+            --electric-blue: #0080ff;
+            --sky-steel: #4a90e2;
+            --gunmetal: #2c3e50;
             --silver: #95a5a6;
+            --smoke: #bdc3c7;
             --white: #ffffff;
-            --dark: #353030;
+            --accent-orange: #ff6b35;
+            
+            /* Gradients */
+            --hero-gradient: linear-gradient(135deg, #0a0e27 0%, #1e3a5f 100%);
+            --card-gradient: linear-gradient(145deg, #1e3a5f 0%, #2c3e50 100%);
+            --text-gradient: linear-gradient(90deg, #4a90e2 0%, #0080ff 100%);
         }
 
         body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--molly-light-pink);
-            color: var(--dark);
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background: var(--midnight);
+            color: var(--smoke);
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* Navigation - Tech meets Sweet */
+        /* Loading Screen - Old School Cool */
+        .loader {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: var(--midnight);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeOut 0.5s 1s forwards;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-text {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            color: var(--electric-blue);
+            font-weight: 300;
+            opacity: 0;
+            animation: slideUp 0.8s forwards;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(-10px); }
+        }
+
+        /* Navigation - Minimal & Functional */
         .nav {
             position: fixed;
             top: 0;
             width: 100%;
             padding: 1rem 5%;
-            background: var(--white);
-            box-shadow: 0 2px 20px rgba(239, 78, 146, 0.1);
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 144, 226, 0.1);
             z-index: 1000;
             transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            padding: 0.5rem 5%;
+            background: rgba(10, 14, 39, 0.98);
         }
 
         .nav-container {
@@ -54,21 +97,13 @@
             align-items: center;
         }
 
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .back-link {
-            color: var(--tech-blue);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .back-link:hover {
-            color: var(--molly-pink);
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
         }
 
         .nav-links {
@@ -78,11 +113,15 @@
         }
 
         .nav-links a {
-            color: var(--dark);
+            color: var(--smoke);
             text-decoration: none;
-            font-weight: 500;
-            position: relative;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--electric-blue);
         }
 
         .nav-links a::after {
@@ -91,8 +130,8 @@
             bottom: -5px;
             left: 0;
             width: 0;
-            height: 3px;
-            background: var(--molly-pink);
+            height: 2px;
+            background: var(--electric-blue);
             transition: width 0.3s ease;
         }
 
@@ -100,553 +139,637 @@
             width: 100%;
         }
 
-        /* Hero Section with Rotating Backgrounds */
+        /* Hero Section - Make an Entrance */
         .hero {
-            margin-top: 60px;
-            padding: 5rem 5%;
-            position: relative;
-            overflow: hidden;
-            min-height: 600px;
+            min-height: 100vh;
+            background: var(--hero-gradient);
             display: flex;
             align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-backgrounds {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 2s ease-in-out;
-        }
-
-        .hero-bg.active {
-            opacity: 1;
-        }
-
-        .hero::after {
+        /* Subtle animated background */
+        .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(239, 78, 146, 0.8) 0%, rgba(226, 6, 138, 0.8) 100%);
-            z-index: 1;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(74, 144, 226, 0.03) 2px,
+                rgba(74, 144, 226, 0.03) 4px
+            );
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            to { transform: translate(50px, 50px); }
         }
 
         .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
+            text-align: center;
             z-index: 2;
-            color: var(--white);
-        }
-
-        .hero-logo-text {
-            height: 80px;
-            margin-bottom: 2rem;
-            filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.2));
+            max-width: 1000px;
+            padding: 0 2rem;
         }
 
         .hero-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(180deg, var(--white) 0%, var(--sky-steel) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease;
         }
 
-        .hero-subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            color: var(--sky-steel);
             margin-bottom: 2rem;
-            opacity: 0.95;
+            font-weight: 300;
+            animation: fadeInUp 0.8s 0.2s ease both;
         }
 
         .hero-description {
             font-size: 1.1rem;
-            max-width: 800px;
+            color: var(--silver);
+            max-width: 700px;
+            margin: 0 auto 3rem;
             line-height: 1.8;
+            animation: fadeInUp 0.8s 0.4s ease both;
         }
 
-        /* Value Props Section */
-        .value-section {
+        /* Portal Cards - Main Navigation Hub */
+        .portals {
             padding: 5rem 5%;
-            background: var(--white);
+            background: linear-gradient(180deg, var(--midnight) 0%, var(--gunmetal) 100%);
         }
 
-        .value-container {
-            max-width: 1200px;
+        .portals-container {
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .section-title {
             font-size: 2.5rem;
-            color: var(--molly-pink);
+            font-weight: 700;
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
         }
 
         .section-subtitle {
-            color: var(--dark);
-            font-size: 1.2rem;
+            color: var(--silver);
+            font-size: 1.1rem;
         }
 
-        .value-grid {
+        .portal-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .value-card {
-            background: var(--molly-light-pink);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 2px solid transparent;
+        .portal-card {
+            background: var(--card-gradient);
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            border-radius: 12px;
+            padding: 2.5rem;
             transition: all 0.3s ease;
+            cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
-        .value-card::before {
+        .portal-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--molly-pink), var(--molly-hot-pink));
+            height: 3px;
+            background: var(--electric-blue);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.3s ease;
         }
 
-        .value-card:hover {
+        .portal-card:hover {
             transform: translateY(-5px);
-            border-color: var(--molly-pink);
-            box-shadow: 0 10px 30px rgba(239, 78, 146, 0.2);
+            border-color: var(--electric-blue);
+            box-shadow: 0 20px 40px rgba(0, 128, 255, 0.1);
         }
 
-        .value-card:hover::before {
+        .portal-card:hover::before {
             transform: scaleX(1);
         }
 
-        .value-icon {
-            font-size: 2rem;
+        .portal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .portal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
             margin-bottom: 1rem;
         }
 
-        .value-title {
-            font-size: 1.3rem;
-            color: var(--molly-hot-pink);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .value-description {
-            color: var(--dark);
+        .portal-description {
+            color: var(--silver);
+            margin-bottom: 1.5rem;
             line-height: 1.6;
         }
 
-        /* Tech Stack Section */
-        .tech-section {
-            padding: 5rem 5%;
-            background: linear-gradient(135deg, var(--tech-blue) 0%, var(--steel) 100%);
-            color: var(--white);
+        .portal-link {
+            color: var(--sky-steel);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
         }
 
-        .tech-container {
+        .portal-link:hover {
+            gap: 1rem;
+            color: var(--electric-blue);
+        }
+
+        .portal-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .portal-link:hover::after {
+            transform: translateX(3px);
+        }
+
+        /* Special card for Molly's */
+        .portal-card.featured {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0080ff 100%);
+            border: none;
+        }
+
+        .portal-card.featured .portal-title {
+            font-size: 1.8rem;
+        }
+
+        /* Molly's Brand Integration */
+        .portal-card.mollys-card {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c3e50 50%, #EF4E92 100%);
+            border: 2px solid rgba(239, 78, 146, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-card.mollys-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(239, 78, 146, 0.1) 0%, transparent 70%);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, -50px) rotate(180deg); }
+        }
+
+        .portal-card.mollys-card .molly-logo {
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px rgba(239, 78, 146, 0.4));
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .portal-card.mollys-card:hover {
+            border-color: #EF4E92;
+            background: linear-gradient(135deg, #2c3e50 0%, #EF4E92 100%);
+            box-shadow: 0 20px 40px rgba(239, 78, 146, 0.3);
+        }
+
+        .portal-card.mollys-card .portal-title {
+            background: linear-gradient(90deg, #fff 0%, #FFE9F0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .portal-card.mollys-card .mollys-link {
+            color: #FFE9F0;
+            font-weight: 600;
+        }
+
+        .portal-card.mollys-card .mollys-link:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(239, 78, 146, 0.5);
+        }
+
+        /* Music/Influences Section */
+        .influences {
+            padding: 5rem 5%;
+            background: var(--midnight);
+            position: relative;
+        }
+
+        .influences-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .influences-intro {
+            font-size: 1.2rem;
+            color: var(--silver);
+            margin-bottom: 3rem;
+            font-style: italic;
         }
 
-        .tech-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+        .influence-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .influence-tag {
+            padding: 0.7rem 1.5rem;
+            background: rgba(74, 144, 226, 0.1);
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            border-radius: 25px;
+            color: var(--sky-steel);
             transition: all 0.3s ease;
         }
 
-        .tech-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-3px);
+        .influence-tag:hover {
+            background: rgba(74, 144, 226, 0.2);
+            transform: translateY(-2px);
         }
 
-        .tech-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--molly-light-pink);
+        /* Quick Links Bar */
+        .quick-links {
+            background: var(--steel-blue);
+            padding: 2rem 5%;
+            text-align: center;
         }
 
-        .tech-detail {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        /* FSMA Section */
-        .fsma-section {
-            padding: 5rem 5%;
-            background: var(--white);
-        }
-
-        .fsma-content {
-            max-width: 1200px;
+        .quick-links-container {
+            max-width: 1000px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .fsma-text h2 {
-            font-size: 2.5rem;
-            color: var(--molly-pink);
-            margin-bottom: 1rem;
-        }
-
-        .fsma-text h3 {
-            font-size: 1.5rem;
-            color: var(--dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .fsma-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .fsma-list li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .fsma-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--molly-pink);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .fsma-graphic {
-            background: var(--molly-light-pink);
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .compliance-score {
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--molly-pink);
-            margin-bottom: 1rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 5rem 5%;
-            background: linear-gradient(135deg, var(--molly-hot-pink) 0%, var(--molly-berry) 100%);
-            text-align: center;
-            color: var(--white);
-        }
-
-        .cta-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .cta-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .cta-buttons {
             display: flex;
-            gap: 1rem;
             justify-content: center;
+            gap: 3rem;
             flex-wrap: wrap;
         }
 
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .btn-white {
-            background: var(--white);
-            color: var(--molly-pink);
-        }
-
-        .btn-white:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-outline {
-            border: 2px solid var(--white);
+        .quick-link {
             color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
         }
 
-        .btn-outline:hover {
-            background: var(--white);
-            color: var(--molly-pink);
+        .quick-link:hover {
+            color: var(--electric-blue);
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
-            padding: 2rem 5%;
-            background: var(--dark);
-            color: var(--white);
+            background: var(--midnight);
+            padding: 3rem 5%;
             text-align: center;
+            border-top: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-quote {
+            font-style: italic;
+            color: var(--silver);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .copyright {
+            color: var(--smoke);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--sky-steel);
+            transition: all 0.3s ease;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--midnight);
+                flex-direction: column;
+                padding: 2rem;
+                border-top: 1px solid rgba(74, 144, 226, 0.1);
             }
 
-            .fsma-content {
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .portal-card.featured {
+                grid-column: span 1;
+            }
+
+            .portal-grid {
                 grid-template-columns: 1fr;
             }
 
             .hero-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
+        }
 
-            .section-title {
-                font-size: 1.8rem;
-            }
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-text">INITIALIZING</div>
+        </div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" id="navbar">
         <div class="nav-container">
-            <div class="logo-section">
-                <a href="/" class="back-link">← Robert Cummer</a>
-                <span style="color: var(--molly-pink); font-weight: 800;">|</span>
-                <img src="/images/molly-logo.png" alt="Molly's" style="height: 40px;">
-            </div>
-            <ul class="nav-links">
-                <li><a href="#digitization">Digitization</a></li>
-                <li><a href="#food-safety">Food Safety</a></li>
-                <li><a href="#technology">Technology</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <div class="logo">CUMMER</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portals">Explore</a></li>
+                <li><a href="#influences">Influences</a></li>
+                <li><a href="mailto:robert.cummer@outlook.com">Contact</a></li>
             </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero with Rotating Background -->
-    <section class="hero">
-        <div class="hero-backgrounds">
-            <img src="/images/hero-1.webp" class="hero-bg active" alt="Molly's Grapes">
-            <img src="/images/hero-2.webp" class="hero-bg" alt="Molly's Grapes">
-            <img src="/images/hero-3.webp" class="hero-bg" alt="Molly's Grapes">
-            <img src="/images/hero-4.webp" class="hero-bg" alt="Molly's Grapes">
-        </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
         <div class="hero-content">
-            <img src="/images/molly-text.png" alt="Molly's" class="hero-logo-text">
-            <h1 class="hero-title">Digital Innovation Meets Agricultural Excellence</h1>
-            <p class="hero-subtitle">Where Sweet Meets Smart</p>
+            <h1 class="hero-title">Robert Cummer</h1>
+            <p class="hero-tagline">Where Technology Meets Tenacity</p>
             <p class="hero-description">
-                As COO/CTO, I'm leading the digital transformation of premium produce distribution. 
-                We're not just moving grapes and citrus – we're revolutionizing how agricultural 
-                businesses embrace technology, ensure compliance, and deliver excellence from 
-                farm to table.
+                30+ years turning complex problems into elegant solutions. 
+                From plant floors to boardrooms, from code to prose. 
+                Engineer. Entrepreneur. Educator. Author. 
+                Still cranking it up to 11.
             </p>
         </div>
     </section>
 
-    <!-- Value Propositions -->
-    <section class="value-section" id="digitization">
-        <div class="value-container">
-            <div class="section-header">
-                <h2 class="section-title">Digital Transformation in Agriculture</h2>
-                <p class="section-subtitle">Old-school quality, new-school efficiency</p>
+    <!-- Portal Section -->
+    <section class="portals" id="portals">
+        <div class="portals-container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Choose Your Path</h2>
+                <p class="section-subtitle">Different worlds, same drive</p>
             </div>
-            
-            <div class="value-grid">
-                <div class="value-card">
-                    <span class="value-icon">📊</span>
-                    <h3 class="value-title">ERP Implementation</h3>
-                    <p class="value-description">
-                        Famous Software on Azure infrastructure. Real-time inventory, automated invoicing, 
-                        and seamless order management. Zero paperwork, 100% accuracy.
+
+            <div class="portal-grid">
+                <!-- Molly's - Featured Card with Brand Colors -->
+                <div class="portal-card featured mollys-card reveal">
+                    <div class="molly-logo">
+                        <img src="/images/mollypop-logo.png" alt="Molly Pop" style="width: 120px; height: auto;">
+                    </div>
+                    <h3 class="portal-title">Molly's Grape & Citrus Company</h3>
+                    <p class="portal-description">
+                        COO/CTO of an agile startup delivering premium table grapes, citrus, and cold-pressed juice. 
+                        Leading digital transformation to meet growing B2B demand while exceeding PTL/FSMA 204 compliance. 
+                        Where small teams achieve big results through smart technology.
                     </p>
+                    <a href="/mollys/" class="portal-link mollys-link">Explore Our Sweet Innovation</a>
                 </div>
-                
-                <div class="value-card">
-                    <span class="value-icon">🔄</span>
-                    <h3 class="value-title">Supply Chain Visibility</h3>
-                    <p class="value-description">
-                        End-to-end traceability from field to customer. Every grape, every box, 
-                        every delivery tracked and optimized using IoT sensors and cloud analytics.
+
+                <!-- Professional/Resume -->
+                <div class="portal-card reveal">
+                    <span class="portal-icon">⚡</span>
+                    <h3 class="portal-title">Professional Journey</h3>
+                    <p class="portal-description">
+                        From H.E. Services to Dow Chemical to founding Iris Automation. 
+                        Patents, awards, and a track record of turning ideas into impact.
                     </p>
+                    <a href="/resume" class="portal-link">View Full Resume</a>
                 </div>
-                
-                <div class="value-card">
-                    <span class="value-icon">📱</span>
-                    <h3 class="value-title">Mobile Operations</h3>
-                    <p class="value-description">
-                        Field teams equipped with mobile tools for real-time quality checks, 
-                        inventory updates, and instant communication. The office goes where the fruit is.
+
+                <!-- Writing/Books -->
+                <div class="portal-card reveal">
+                    <span class="portal-icon">📚</span>
+                    <h3 class="portal-title">Literary Works</h3>
+                    <p class="portal-description">
+                        Knox Ramsey thrillers. Vendetta. Technical guides. 
+                        Stories that grip, knowledge that sticks.
                     </p>
+                    <a href="/books" class="portal-link">Explore My Books</a>
                 </div>
-                
-                <div class="value-card">
-                    <span class="value-icon">🤖</span>
-                    <h3 class="value-title">Process Automation</h3>
-                    <p class="value-description">
-                        From order processing to compliance reporting, we've automated repetitive tasks 
-                        to focus human talent on relationships and quality.
+
+                <!-- Teaching -->
+                <div class="portal-card reveal">
+                    <span class="portal-icon">🎓</span>
+                    <h3 class="portal-title">Academic Impact</h3>
+                    <p class="portal-description">
+                        Mid Michigan College Adjunct Professor. 
+                        Teaching the next generation that theory without practice is just philosophy.
                     </p>
+                    <a href="/teaching" class="portal-link">Course Information</a>
                 </div>
-                
-                <div class="value-card">
-                    <span class="value-icon">📈</span>
-                    <h3 class="value-title">Data-Driven Decisions</h3>
-                    <p class="value-description">
-                        Predictive analytics for demand forecasting, quality trends, and optimal 
-                        distribution routes. Smart decisions backed by real data.
+
+                <!-- Blog/Learnings -->
+                <div class="portal-card reveal">
+                    <span class="portal-icon">💡</span>
+                    <h3 class="portal-title">Learnings & Insights</h3>
+                    <p class="portal-description">
+                        Three decades of wins, failures, and everything in between. 
+                        Real talk about technology, business, and life.
                     </p>
-                </div>
-                
-                <div class="value-card">
-                    <span class="value-icon">🌱</span>
-                    <h3 class="value-title">Sustainable Practices</h3>
-                    <p class="value-description">
-                        Digital documentation reduces paper waste by 95%. Optimized logistics 
-                        cut carbon emissions. Technology serving both profit and planet.
-                    </p>
+                    <a href="/blog" class="portal-link">Read the Blog</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Technology Stack -->
-    <section class="tech-section" id="technology">
-        <div class="tech-container">
-            <div class="section-header">
-                <h2 class="section-title" style="color: var(--white);">Our Technology Stack</h2>
-                <p class="section-subtitle" style="color: var(--molly-light-pink);">
-                    Enterprise solutions tailored for agricultural excellence
-                </p>
-            </div>
+    <!-- Influences Section -->
+    <section class="influences reveal" id="influences">
+        <div class="influences-content">
+            <h2 class="section-title">Soundtrack & Influences</h2>
+            <p class="influences-intro">
+                "Knox Ramsey's playlist is my playlist"
+            </p>
             
-            <div class="tech-grid">
-                <div class="tech-item">
-                    <div class="tech-name">Famous Software ERP</div>
-                    <div class="tech-detail">Complete business management platform</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-name">Microsoft Azure</div>
-                    <div class="tech-detail">Cloud infrastructure & security</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-name">Windows Server</div>
-                    <div class="tech-detail">Enterprise server management</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-name">FSMA Compliance Tools</div>
-                    <div class="tech-detail">Traceability & documentation</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-name">Organic Certification</div>
-                    <div class="tech-detail">Quality assurance systems</div>
-                </div>
-                <div class="tech-item">
-                    <div class="tech-name">Custom APIs</div>
-                    <div class="tech-detail">Seamless system integration</div>
-                </div>
+            <div class="influence-tags">
+                <span class="influence-tag">Led Zeppelin</span>
+                <span class="influence-tag">Pink Floyd</span>
+                <span class="influence-tag">AC/DC</span>
+                <span class="influence-tag">Rush</span>
+                <span class="influence-tag">Van Halen</span>
+                <span class="influence-tag">Metallica</span>
+                <span class="influence-tag">Guns N' Roses</span>
+            </div>
+
+            <p class="influences-intro" style="margin-top: 3rem;">
+                Literary mentors who showed the way
+            </p>
+            
+            <div class="influence-tags">
+                <span class="influence-tag">Tom Clancy</span>
+                <span class="influence-tag">Michael Crichton</span>
+                <span class="influence-tag">Lee Child</span>
+                <span class="influence-tag">Stephen King</span>
+                <span class="influence-tag">John Grisham</span>
             </div>
         </div>
     </section>
 
-    <!-- FSMA Compliance -->
-    <section class="fsma-section" id="food-safety">
-        <div class="fsma-content">
-            <div class="fsma-text">
-                <h2>FSMA 204 Compliance</h2>
-                <h3>Food Safety Leadership</h3>
-                <p style="margin-bottom: 2rem;">
-                    We don't just meet regulations – we exceed them. Our comprehensive 
-                    food safety program combines cutting-edge technology with rigorous 
-                    protocols to ensure every product meets the highest standards.
-                </p>
-                
-                <ul class="fsma-list">
-                    <li>Complete traceability within 24 hours</li>
-                    <li>Digital record keeping for 2+ years</li>
-                    <li>Automated Critical Tracking Events (CTEs)</li>
-                    <li>Key Data Elements (KDEs) at every step</li>
-                    <li>Mock recall capability in under 4 hours</li>
-                    <li>Blockchain-ready documentation</li>
-                </ul>
-            </div>
-            
-            <div class="fsma-graphic">
-                <div class="compliance-score">100%</div>
-                <h3 style="color: var(--molly-hot-pink); margin-bottom: 1rem;">FSMA Compliant</h3>
-                <p style="color: var(--dark);">
-                    Certified organic. Fully traceable. Always safe.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section" id="contact">
-        <h2 class="cta-title">Let's Transform Your Agricultural Business</h2>
-        <p class="cta-subtitle">
-            From digitization strategy to FSMA compliance, we're here to help
-        </p>
-        <div class="cta-buttons">
-            <a href="mailto:robert.cummer@outlook.com" class="btn btn-white">Discuss Technology</a>
-            <a href="https://mollypopgrapes.com" target="_blank" class="btn btn-outline">Visit Molly Loop</a>
+    <!-- Quick Links Bar -->
+    <section class="quick-links">
+        <div class="quick-links-container">
+            <a href="https://www.linkedin.com/in/rcummer3205" target="_blank" class="quick-link">
+                <span>💼</span> LinkedIn
+            </a>
+            <a href="mailto:robert.cummer@outlook.com" class="quick-link">
+                <span>✉️</span> Email
+            </a>
+            <a href="#" class="quick-link">
+                <span>📖</span> Amazon Author
+            </a>
+            <a href="/cv-download" class="quick-link">
+                <span>📄</span> Download CV
+            </a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 Molly's Grape & Citrus Company | Technology by Robert Cummer</p>
+        <div class="footer-content">
+            <p class="footer-quote">
+                "Experience is what you get when you didn't get what you wanted"
+            </p>
+            <p class="copyright">
+                © 2025 Robert Cummer. Built with coffee, code, and classic rock.
+            </p>
+        </div>
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -660,29 +783,32 @@
             });
         });
 
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav');
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
-                nav.style.boxShadow = '0 2px 30px rgba(239, 78, 146, 0.15)';
-            } else {
-                nav.style.background = 'var(--white)';
-                nav.style.boxShadow = '0 2px 20px rgba(239, 78, 146, 0.1)';
-            }
+        // Add hover sound effect (optional - remove if too much)
+        document.querySelectorAll('.portal-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Could add a subtle click sound here if desired
+            });
         });
 
-        // Hero background rotation
-        const heroBackgrounds = document.querySelectorAll('.hero-bg');
-        let currentBg = 0;
+        // Dynamic tagline rotation (subtle)
+        const taglines = [
+            "Where Technology Meets Tenacity",
+            "From Plant Floor to Cloud Floor",
+            "Engineering Tomorrow, Today",
+            "Salt & Pepper Wisdom, Cutting Edge Solutions"
+        ];
         
-        if (heroBackgrounds.length > 0) {
-            setInterval(() => {
-                heroBackgrounds[currentBg].classList.remove('active');
-                currentBg = (currentBg + 1) % heroBackgrounds.length;
-                heroBackgrounds[currentBg].classList.add('active');
-            }, 5000); // Change every 5 seconds
-        }
+        let taglineIndex = 0;
+        const taglineElement = document.querySelector('.hero-tagline');
+        
+        setInterval(() => {
+            taglineIndex = (taglineIndex + 1) % taglines.length;
+            taglineElement.style.opacity = '0';
+            setTimeout(() => {
+                taglineElement.textContent = taglines[taglineIndex];
+                taglineElement.style.opacity = '1';
+            }, 500);
+        }, 5000);
     </script>
 </body>
 </html>
