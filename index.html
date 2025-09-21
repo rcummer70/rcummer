@@ -3,41 +3,754 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robert Cummer - Professional Hub</title>
+    <title>Robert Cummer | Where Technology Meets Tenacity</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; line-height: 1.6; }
-        header { text-align: center; background: #f4f4f4; padding: 20px; }
-        section { margin: 40px 0; }
-        h2 { color: #333; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin: 10px 0; }
-        @media (max-width: 768px) { body { padding: 10px; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Gen X Blues & Greys - Professional with Edge */
+            --midnight: #0a0e27;
+            --steel-blue: #1e3a5f;
+            --electric-blue: #0080ff;
+            --sky-steel: #4a90e2;
+            --gunmetal: #2c3e50;
+            --silver: #95a5a6;
+            --smoke: #bdc3c7;
+            --white: #ffffff;
+            --accent-orange: #ff6b35;
+            
+            /* Gradients */
+            --hero-gradient: linear-gradient(135deg, #0a0e27 0%, #1e3a5f 100%);
+            --card-gradient: linear-gradient(145deg, #1e3a5f 0%, #2c3e50 100%);
+            --text-gradient: linear-gradient(90deg, #4a90e2 0%, #0080ff 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background: var(--midnight);
+            color: var(--smoke);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Loading Screen - Old School Cool */
+        .loader {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: var(--midnight);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeOut 0.5s 1s forwards;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-text {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            color: var(--electric-blue);
+            font-weight: 300;
+            opacity: 0;
+            animation: slideUp 0.8s forwards;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(-10px); }
+        }
+
+        /* Navigation - Minimal & Functional */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 144, 226, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            padding: 0.5rem 5%;
+            background: rgba(10, 14, 39, 0.98);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--smoke);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--electric-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--electric-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section - Make an Entrance */
+        .hero {
+            min-height: 100vh;
+            background: var(--hero-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle animated background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(74, 144, 226, 0.03) 2px,
+                rgba(74, 144, 226, 0.03) 4px
+            );
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            to { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(180deg, var(--white) 0%, var(--sky-steel) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            color: var(--sky-steel);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: fadeInUp 0.8s 0.2s ease both;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--silver);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s 0.4s ease both;
+        }
+
+        /* Portal Cards - Main Navigation Hub */
+        .portals {
+            padding: 5rem 5%;
+            background: linear-gradient(180deg, var(--midnight) 0%, var(--gunmetal) 100%);
+        }
+
+        .portals-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--silver);
+            font-size: 1.1rem;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .portal-card {
+            background: var(--card-gradient);
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--electric-blue);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--electric-blue);
+            box-shadow: 0 20px 40px rgba(0, 128, 255, 0.1);
+        }
+
+        .portal-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .portal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .portal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .portal-description {
+            color: var(--silver);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .portal-link {
+            color: var(--sky-steel);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .portal-link:hover {
+            gap: 1rem;
+            color: var(--electric-blue);
+        }
+
+        .portal-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .portal-link:hover::after {
+            transform: translateX(3px);
+        }
+
+        /* Special card for Molly's */
+        .portal-card.featured {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0080ff 100%);
+            border: none;
+        }
+
+        .portal-card.featured .portal-title {
+            font-size: 1.8rem;
+        }
+
+        /* Music/Influences Section */
+        .influences {
+            padding: 5rem 5%;
+            background: var(--midnight);
+            position: relative;
+        }
+
+        .influences-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .influences-intro {
+            font-size: 1.2rem;
+            color: var(--silver);
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .influence-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .influence-tag {
+            padding: 0.7rem 1.5rem;
+            background: rgba(74, 144, 226, 0.1);
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            border-radius: 25px;
+            color: var(--sky-steel);
+            transition: all 0.3s ease;
+        }
+
+        .influence-tag:hover {
+            background: rgba(74, 144, 226, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Quick Links Bar */
+        .quick-links {
+            background: var(--steel-blue);
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        .quick-links-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-link {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .quick-link:hover {
+            color: var(--electric-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--midnight);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-quote {
+            font-style: italic;
+            color: var(--silver);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .copyright {
+            color: var(--smoke);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--sky-steel);
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--midnight);
+                flex-direction: column;
+                padding: 2rem;
+                border-top: 1px solid rgba(74, 144, 226, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .portal-card.featured {
+                grid-column: span 1;
+            }
+
+            .portal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Robert Cummer</h1>
-        <p>Entrepreneur, Adjunct Professor, Author, and Co-Founder & COO/CTO of Molly's Grape & Citrus Company</p>
-    </header>
-    <section id="ventures">
-        <h2>Entrepreneurial Ventures</h2>
-        <p>Co-founder, COO & CTO of <strong>Molly's Grape & Citrus Company</strong> – Innovating in sustainable agriculture and tech-driven solutions for grape and citrus production.</p>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-text">INITIALIZING</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <div class="logo">CUMMER</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portals">Explore</a></li>
+                <li><a href="#influences">Influences</a></li>
+                <li><a href="mailto:robert.cummer@outlook.com">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Robert Cummer</h1>
+            <p class="hero-tagline">Where Technology Meets Tenacity</p>
+            <p class="hero-description">
+                30+ years turning complex problems into elegant solutions. 
+                From plant floors to boardrooms, from code to prose. 
+                Engineer. Entrepreneur. Educator. Author. 
+                Still cranking it up to 11.
+            </p>
+        </div>
     </section>
-    <section id="teaching">
-        <h2>Adjunct Professor</h2>
-        <p>Teaching courses in technology at Mid Michigan College. Empowering the next generation with practical skills from the plant floor to the boardroom.</p>
+
+    <!-- Portal Section -->
+    <section class="portals" id="portals">
+        <div class="portals-container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Choose Your Path</h2>
+                <p class="section-subtitle">Different worlds, same drive</p>
+            </div>
+
+            <div class="portal-grid">
+                <!-- Molly's - Featured Card -->
+                <div class="portal-card featured reveal">
+                    <span class="portal-icon">🍇</span>
+                    <h3 class="portal-title">Molly's Grape & Citrus Company</h3>
+                    <p class="portal-description">
+                        COO/CTO revolutionizing agriculture through digital transformation. 
+                        Leading the charge in food safety compliance, FSMA 204 traceability, 
+                        and sustainable farming practices. Where traditional agriculture 
+                        meets cutting-edge technology.
+                    </p>
+                    <a href="/mollys" class="portal-link">Explore Our Innovation</a>
+                </div>
+
+                <!-- Professional/Resume -->
+                <div class="portal-card reveal">
+                    <span class="portal-icon">⚡</span>
+                    <h3 class="portal-title">Professional Journey</h3>
+                    <p class="portal-description">
+                        From H.E. Services to Dow Chemical to founding Iris Automation. 
+                        Patents, awards, and a track record of turning ideas into impact.
+                    </p>
+                    <a href="/resume" class="portal-link">View Full Resume</a>
+                </div>
+
+                <!-- Writing/Books -->
+                <div class="portal-card reveal">
+                    <span class="portal-icon">📚</span>
+                    <h3 class="portal-title">Literary Works</h3>
+                    <p class="portal-description">
+                        Knox Ramsey thrillers. Vendetta. Technical guides. 
+                        Stories that grip, knowledge that sticks.
+                    </p>
+                    <a href="/books" class="portal-link">Explore My Books</a>
+                </div>
+
+                <!-- Teaching -->
+                <div class="portal-card reveal">
+                    <span class="portal-icon">🎓</span>
+                    <h3 class="portal-title">Academic Impact</h3>
+                    <p class="portal-description">
+                        Mid Michigan College Adjunct Professor. 
+                        Teaching the next generation that theory without practice is just philosophy.
+                    </p>
+                    <a href="/teaching" class="portal-link">Course Information</a>
+                </div>
+
+                <!-- Blog/Learnings -->
+                <div class="portal-card reveal">
+                    <span class="portal-icon">💡</span>
+                    <h3 class="portal-title">Learnings & Insights</h3>
+                    <p class="portal-description">
+                        Three decades of wins, failures, and everything in between. 
+                        Real talk about technology, business, and life.
+                    </p>
+                    <a href="/blog" class="portal-link">Read the Blog</a>
+                </div>
+            </div>
+        </div>
     </section>
-    <section id="books">
-        <h2>Books & Publications</h2>
-        <ul>
-            <li><strong>Knox Ramsey Thrillers</strong>: Gripping suspense series blending high-stakes action and intrigue.</li>
-            <li><strong>Vendetta</strong>: A standalone thriller exploring revenge and redemption.</li>
-            <li><strong>Boots on the Ground Technical Series (aka Plant Floor Troubleshooting Guide)</strong>: Essential handbook for real-world manufacturing problem-solving, from diagnostics to fixes.</li>
-        </ul>
-        <p>Available on Amazon and major retailers – links coming soon.</p>
+
+    <!-- Influences Section -->
+    <section class="influences reveal" id="influences">
+        <div class="influences-content">
+            <h2 class="section-title">Soundtrack & Influences</h2>
+            <p class="influences-intro">
+                "Knox Ramsey's playlist is my playlist"
+            </p>
+            
+            <div class="influence-tags">
+                <span class="influence-tag">Led Zeppelin</span>
+                <span class="influence-tag">Pink Floyd</span>
+                <span class="influence-tag">AC/DC</span>
+                <span class="influence-tag">Rush</span>
+                <span class="influence-tag">Van Halen</span>
+                <span class="influence-tag">Metallica</span>
+                <span class="influence-tag">Guns N' Roses</span>
+            </div>
+
+            <p class="influences-intro" style="margin-top: 3rem;">
+                Literary mentors who showed the way
+            </p>
+            
+            <div class="influence-tags">
+                <span class="influence-tag">Tom Clancy</span>
+                <span class="influence-tag">Michael Crichton</span>
+                <span class="influence-tag">Lee Child</span>
+                <span class="influence-tag">Stephen King</span>
+                <span class="influence-tag">John Grisham</span>
+            </div>
+        </div>
     </section>
-    <footer style="text-align: center; margin-top: 40px; padding: 10px; background: #f4f4f4;">
-        <p>&copy; 2025 Robert Cummer | <a href="mailto:contact@robertcummer.com">Contact</a></p>
+
+    <!-- Quick Links Bar -->
+    <section class="quick-links">
+        <div class="quick-links-container">
+            <a href="https://www.linkedin.com/in/rcummer3205" target="_blank" class="quick-link">
+                <span>💼</span> LinkedIn
+            </a>
+            <a href="mailto:robert.cummer@outlook.com" class="quick-link">
+                <span>✉️</span> Email
+            </a>
+            <a href="#" class="quick-link">
+                <span>📖</span> Amazon Author
+            </a>
+            <a href="/cv-download" class="quick-link">
+                <span>📄</span> Download CV
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-quote">
+                "Experience is what you get when you didn't get what you wanted"
+            </p>
+            <p class="copyright">
+                © 2025 Robert Cummer. Built with coffee, code, and classic rock.
+            </p>
+        </div>
     </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add hover sound effect (optional - remove if too much)
+        document.querySelectorAll('.portal-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Could add a subtle click sound here if desired
+            });
+        });
+
+        // Dynamic tagline rotation (subtle)
+        const taglines = [
+            "Where Technology Meets Tenacity",
+            "From Plant Floor to Cloud Floor",
+            "Engineering Tomorrow, Today",
+            "Salt & Pepper Wisdom, Cutting Edge Solutions"
+        ];
+        
+        let taglineIndex = 0;
+        const taglineElement = document.querySelector('.hero-tagline');
+        
+        setInterval(() => {
+            taglineIndex = (taglineIndex + 1) % taglines.length;
+            taglineElement.style.opacity = '0';
+            setTimeout(() => {
+                taglineElement.textContent = taglines[taglineIndex];
+                taglineElement.style.opacity = '1';
+            }, 500);
+        }, 5000);
+    </script>
 </body>
 </html>
